@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+#game-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+#map_grid {
+    display: grid;
+    grid-template-columns: repeat(25, 20px); /* 25 คอลัมน์ */
+    grid-template-rows: repeat(25, 20px); /* 25 แถว */
+    gap: 1px;
+    margin: 20px 0;
+    background-color: #ccc;
+}
+
+.tile {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+}
+
+.tile.wall {
+    background-color: black;
+}
+
+.tile.weapon {
+    background-color: yellow;
+}
+
+.tile.player {
+    background-image: url('gif/Sprite-0002.gif'); /* รูป GIF ของตัวละคร */
+    background-size: cover;
+}
+
+#gif-container {
+    text-align: center;
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG 2D Game</title>
+    <style>
+        #container {
+            position: relative;
+            width: 1500px;
+            height: 1000px;
+            overflow: hidden;
+            border: 1px solid #000;
+        }
+        #gif {
+            position: absolute;
+            width: 100px; /* ปรับขนาดของ GIF ตามที่ต้องการ */
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img id="gif" src="gif/idel.gif" alt="Moving GIF">
+        <img id="gif" src="gif/mon1.gif" alt="Moving GIF">
+    </div>
+
+    <script>
+        const gif = document.getElementById('gif');
+        const step = 10; // จำนวนพิกเซลที่ GIF เคลื่อนที่ในแต่ละครั้ง
+
+        // URLs ของ GIF ต่างๆ
+        const gifs = {
+            'idel': 'gif/idel.gif',
+            'w': 'gif/arrowup.gif',
+            's': 'gif/arrowdown.gif',
+            'a': 'gif/arrowleft.gif',
+            'd': 'gif/arrowright.gif',
+        };
+
+        let idleTimeout;
+
+        function resetToIdle() {
+            gif.src = gifs['idel'];
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const style = window.getComputedStyle(gif);
+            let top = parseInt(style.top) || 0;
+            let left = parseInt(style.left) || 0;
+
+            // เคลียร์ timeout ที่มีอยู่
+            clearTimeout(idleTimeout);
+
+            if (event.key === 'w') {
+                gif.src = gifs['w'];
+                gif.style.top = `${top - step}px`;
+            } else if (event.key === 's') {
+                gif.src = gifs['s'];
+                gif.style.top = `${top + step}px`;
+            } else if (event.key === 'a') {
+                gif.src = gifs['a'];
+                gif.style.left = `${left - step}px`;
+            } else if (event.key === 'd') {
+                gif.src = gifs['d'];
+                gif.style.left = `${left + step}px`;
+            }
+
+            // ตั้งเวลาใหม่เพื่อเปลี่ยนกลับไปที่ idle GIF หลังจากไม่มีการกดปุ่ม
+            idleTimeout = setTimeout(resetToIdle, 250); // 1000ms = 1s
+        });
+    </script>
+</body>
+</html>
